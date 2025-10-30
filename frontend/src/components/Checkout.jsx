@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Cookie from "js-cookie";
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import axios from 'axios';
 import { Divider } from '@mui/material';
 import Footer from './Footer';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,15 +16,11 @@ const countryOptions = [
 ];
 
 const Checkout = () => {
-    const token = Cookie.get(import.meta.env.VITE_COOKIE_TOKEN_NAME);
-    // const [carts, setCarts] = useState([]);
     const navigate = useNavigate();
     const shippingCharge = 10;
     const location = useLocation();
     const { totalAmount } = location.state || {};
     const {carts} = useCart();
-
-    console.log(totalAmount,'totalAmount 26')
 
     const [form, setForm] = useState({
         firstName: '',

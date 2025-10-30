@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import blog_background_image from "../../public/blog/blog-background-image.jpg";
 import axios from "axios";
 import { Pagination, Stack } from "@mui/material";
 import noProductFound from "../../public/products/hand-drawn-no-data-illustration_23-2150696443.jpg";
@@ -10,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import left_arrow from "../../public/blog/left-arrow.svg";
 import right_arrow from "../../public/blog/right-arrow.svg";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +22,6 @@ const Blogs = () => {
   const [bestSellingProducts, setbestSellingProducts] = useState([]);
   const swiperRef = useRef(null);
   const navigate = useNavigate();
-  const selectRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const getLabel = (value) => {
@@ -151,12 +148,13 @@ const Blogs = () => {
                   return (
                     <div className="flex gap-5 mt-5">
                       <img
-                        className="h-20 w-20 object-cover rounded-xl"
+                       onClick={() => navigate(`/blog/${blog._id}`)}
+                        className="h-20 w-20 object-cover rounded-xl cursor-pointer"
                         src={blog.blogImage}
                         alt={blog.blogName}
                       />
                       <div className="">
-                        <h1>{blog.blogName}</h1>
+                        <h1 className="cursor-pointer" onClick={() => navigate(`/blog/${blog._id}`)}>{blog.blogName}</h1>
                         <p
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(blog.htmlContent),

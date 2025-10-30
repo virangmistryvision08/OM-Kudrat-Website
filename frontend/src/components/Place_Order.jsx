@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useCart } from "../context/CartContext";
+import api from "../instance/axiosInstance";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -71,7 +72,7 @@ const CheckoutForm = () => {
         try {
             const selectedCurrency = countryOptions.find(c => c.code === billingDetails.country)?.currency || "usd";
 
-            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/payment/create-payment-intent`, {
+            const { data } = await api.post(`${import.meta.env.VITE_BACKEND_URL}/api/payment/create-payment-intent`, {
                 amount: totalAmount.toFixed(2),
                 currency: selectedCurrency,
                 userId: user._id,
